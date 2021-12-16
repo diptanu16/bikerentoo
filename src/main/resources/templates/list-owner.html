@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>List Owner</title>
+        <link rel="stylesheet" type="text/css"
+              href="https://cdn.datatables.net/v/bs4/dt-1.11.3/datatables.min.css"/>
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+    </head>
+        <body>
+            <div class="container">
+                <center> <h2>Bike Owner Details </h2>
+                <hr/>
+                <h5 style="text-align-center">Search Bike by Pincode/Location</h5>
+                </center>
+                <a th:href="@{/addOwnerForm}" class="btn btn-success mb-4 ">Add Bike Details For Rent</a>
+                <table class="table table-bordered table-striped" id="owner-table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>BikeName</th>
+                        <th>Location</th>
+                        <th>PhoneNo</th>
+                        <th>Pincode</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="owner:${owners}">
+                            <td th:text="${owner.name}"></td>
+                            <td th:text="${owner.bikename}"></td>
+                            <td th:text="${owner.location}"></td>
+                            <td th:text="${owner.phoneno}"></td>
+                            <td th:text="${owner.pincode}"></td>
+                            <td>
+                                <a th:href="@{/showUpdateForm(ownerId=${owner.id})}" class="btn btn-info">Update</a>
+                                <a th:href="@{/deleteOwner(ownerId=${owner.id})}" class="btn btn-danger ml-2">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.3/datatables.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                 $("#owner-table").DataTable({'aoColumnDefs':[{'bSortable':false,'aTargets':[-1]}]});
+                })
+            </script>
+        </body>
+<html/>
